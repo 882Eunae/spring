@@ -7,9 +7,8 @@ public class App
 {
     public static void main( String[] args )
     {
-
     	ApplicationContext ctx = new AnnotationConfigApplicationContext(Ex03Configure.class);
     	Restaurant restarurant = (Restaurant)ctx.getBean("restaurant");
-		restarurant.getChef().cook();
+		//restarurant.getChef().cook();
     }
 }
