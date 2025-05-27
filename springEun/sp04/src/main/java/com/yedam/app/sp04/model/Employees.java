@@ -1,0 +1,26 @@
+package com.yedam.app.sp04.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Employees {
+
+private String	employeeId;
+private String	firstName;
+private String	lastName;
+private String	email;
+private String	phonenumber;
+private String	hireDate;
+private String	jobId;
+private String	salary;
+private String	commissionPct;
+private String	managerId;
+private String	departmentId; 
+private String cnt; 
+}
