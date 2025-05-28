@@ -43,7 +43,7 @@ public class BoardMapperTest {
 		System.out.println(result);	
 	}
 	
-	@Test //삭제완료 
+	//@Test //삭제완료 
 	public void delete() {
 	    BoardVO board = new BoardVO();
 	    board.setBno(2);

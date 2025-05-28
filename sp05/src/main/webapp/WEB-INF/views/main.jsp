@@ -12,7 +12,9 @@ ${sampleDTO }<br>
 ${param.name}<br> <!-- request.getParameter("") -->
 ${param.age}<br>
 ${dept }<br>
-${age }
+${age }<br>
+<hr>
+msg: ${msg }<br>
 
 </body>
 </html>
