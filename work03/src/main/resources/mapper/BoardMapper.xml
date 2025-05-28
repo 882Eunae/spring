@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.work03.mapper.BoardMapper">
+<select id="findAll" resultType="com.yedam.app.work03.model.BoardVO">
+  select * from tbl_board
+  </select>
+<update id="updateTitle" parameterType="com.yedam.app.work03.model.BoardVO">
+	update tbl_board 
+    set title= #{title}
+    where bno=#{bno}
+</update>
+
+<insert id="insert" parameterType="com.yedam.app.work03.model.BoardVO">
+insert into tbl_board(
+	BNO,
+	TITLE,
+	CONTENT,
+	WRITER
+)
+values(
+   #{bno},
+   #{title},
+   #{content},
+   #{writer}
+)
+</insert>
+
+<delete id="delete" parameterType="com.yedam.app.work03.model.BoardVO">
+delete from tbl_board
+where bno=#{bno}
+</delete>
+
+</mapper>
