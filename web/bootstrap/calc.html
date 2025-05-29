@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calc.html</title>
+</head>
+<body>
+  <input type="number" id="num1">
+  <input type="number" id="num2">
+  <button type="button" id="btn" onclick="plus()">계산</button>
+  <div id="result"></div>
+<script>
+  //버튼 클릭 이벤트 지정 
+  //클릭하면 num1 과 num2 더해서  result에 출력 
+function plus(){
+let num1= Number(document.getElementById("num1").value); 
+let num2=Number(document.getElementById("num2").value); 
+let res=num1+num2;
+document.getElementById("result").innerHTML=res; 
+}
+
+let btn=document.getElementById("btn"); //btn 먼저 찾기  
+btn.addEventListener("click",()=>{
+  result.innerHTML=Number(num1.value)+Number(num2.value); 
+});
+
+</script>
+
+</body>
+</html>

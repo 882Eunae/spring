@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="txtFruit">
+  <button type="button" id="btnAdd" onclick="addFruit()">추가</button><br>
+  <button type="button" id="btnAdd" onclick="addFruit()">삭제</button>
+  <select id="selFruits" size="10">
+    <option>사과</option>
+  </select> 
+    <!-- 옵션이 여기에 추가됩니다 -->
+     <script>
+      function addFruit(){
+        //텍스트 입력값을 변수에 저장 
+        selFruits.insertAdjacentHTML("beforeend",`<option>${txtFruit.value}</option>`);
+        txtFruit.value=''; 
+      }
+      txtFruit.addEventListenner("keypress",(e)=>{
+        if(e.keyCode==13){
+          btnAdd.click();
+        }
+      }) 
+    
+
+      
+
+     </script>
+
+
+</body>
+</html>
