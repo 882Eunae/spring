@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.sp06.board.mapper.BoardMapper">
+<sql id="criteria">
+<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+		<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+				</foreach>
+		</trim>
+</sql>
+
+<select id="findAll" resultType="com.company.sp06.board.service.BoardVO" parameterType="com.company.sp06.board.service.Criteria">
+ select
+    bno, title, content, writer, regDate, updateDate
+  from
+      (
+      select /*+INDEX_DESC(tbl_board pk_board) */
+        rownum rn, bno, title, content, writer, regDate, updateDate
+      from
+        tbl_board
+      where
+		<include refid="criteria"></include>
+  <![CDATA[
+      rownum <= #{pageNum} * #{amount}
+      )
+  where rn > (#{pageNum} -1) * #{amount}
+  ]]>
+  </select>
+ <select id="getCount" resultType="long"
+          parameterType="com.company.sp06.board.service.Criteria">
+		select count(*) from tbl_board where
+		<include refid="criteria"></include>
+		bno > 0
+	</select> 
+ 
+ <select id="findByBno" resultType="com.company.sp06.board.service.BoardVO" parameterType="int">
+ select * from tbl_board
+ where bno=#{bno}
+ </select>
+  
+<update id="updateTitle" parameterType="com.company.sp06.board.service.BoardVO">
+	update tbl_board 
+    set title= #{title}
+    where bno=#{bno}
+</update>
+
+<insert id="insert" parameterType="com.company.sp06.board.service.BoardVO">
+ <selectKey keyProperty="bno" order="BEFORE" resultType="int">
+ 	select seq_board.nextval from dual
+ </selectKey>
+insert into tbl_board(
+	BNO,
+	TITLE,
+	CONTENT,
+	WRITER
+)
+values(
+   #{bno},
+   #{title},
+   #{content},
+   #{writer}
+)
+</insert>
+<delete id="delete" parameterType="com.company.sp06.board.service.BoardVO">
+delete from tbl_board
+where bno=#{bno}
+</delete>
+
+</mapper>
