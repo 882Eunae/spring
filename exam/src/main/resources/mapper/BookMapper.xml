@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.book.mapper.BookMapper">
+	<select id="findAll" resultType="com.company.book.service.BookVO">
+		select 
+BOOK_NO,
+BOOK_NAME,
+BOOK_COVERIMG,
+BOOK_DATE,
+BOOK_PRICE,
+BOOK_PUBLISHER,
+BOOK_INFO 
+from book_tbl_06
+order by book_no
+	</select>
+<insert id="bookinsert" parameterType="com.company.book.service.BookVO">
+<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">
+ 	select book_seq.nextval from dual
+ </selectKey>
+INSERT INTO book_tbl_06(
+BOOK_NO,
+BOOK_NAME,
+BOOK_COVERIMG,
+BOOK_DATE,
+BOOK_PRICE,
+BOOK_PUBLISHER,
+BOOK_INFO )
+VALUES (
+	#{bookNo},
+	#{bookName},
+	#{bookCoverimg},
+	#{bookDate}, 
+	#{bookPrice}, 
+	#{bookPublisher}, 
+	#{bookInfo}
+)
+</insert>
+
+<select id="findAllRent" resultType="com.company.book.service.RentVO">
+select 
+rt.BOOK_NO,
+bt.book_name,
+sum(rt.rent_price) as sumPrice,
+sum(rt.rent_status) as sumStatus
+from book_tbl_06 bt
+JOIN rent_tbl_06 rt on bt.book_no=rt.book_no
+group by rt.BOOK_NO,bt.book_name
+	</select>
+
+
+</mapper>
